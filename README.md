@@ -1,8 +1,11 @@
 # 🏢 MLOps Sentiment Analysis - Company Reputation Monitoring
 
 [![CI](https://github.com/pdimarcodev/sentiment-monitoring-mlops/actions/workflows/ci.yml/badge.svg)](https://github.com/pdimarcodev/sentiment-monitoring-mlops/actions/workflows/ci.yml)
+[![HuggingFace Space](https://img.shields.io/badge/🤗%20Hugging%20Face-Space-blue)](https://huggingface.co/spaces/pdimarcodev/sentiment-monitoring-mlops)
 
 An end-to-end MLOps solution for monitoring company reputation through automated sentiment analysis of social media content.
+
+**🚀 [Try the Live Demo on HuggingFace Spaces](https://huggingface.co/spaces/pdimarcodev/sentiment-monitoring-mlops)**
 
 ## 🎯 Project Overview
 
