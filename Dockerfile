@@ -1,5 +1,5 @@
 # Multi-stage build for smaller production image
-FROM python:3.9-slim as builder
+FROM python:3.10-slim AS builder
 
 # Install build dependencies
 RUN apt-get update && apt-get install -y \
@@ -16,7 +16,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir --user -r requirements.txt
 
 # Production stage
-FROM python:3.9-slim
+FROM python:3.10-slim
 
 # Create non-root user for security
 RUN useradd --create-home --shell /bin/bash app
