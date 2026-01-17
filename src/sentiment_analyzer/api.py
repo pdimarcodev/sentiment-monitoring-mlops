@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException, File, UploadFile, Form
 from pydantic import BaseModel, Field
 from typing import List, Dict, Union, Optional
+from contextlib import asynccontextmanager
 import time
 import logging
 import tempfile
@@ -16,30 +17,33 @@ REQUEST_COUNT = Counter('sentiment_requests_total', 'Total sentiment analysis re
 REQUEST_DURATION = Histogram('sentiment_request_duration_seconds', 'Request duration')
 PREDICTION_COUNT = Counter('sentiment_predictions_total', 'Total predictions by sentiment', ['sentiment'])
 
-# Initialize FastAPI app
+# Initialize the sentiment analyzer and dataset processor at module level
+sentiment_analyzer = SentimentAnalyzer()
+dataset_processor = DatasetProcessor(sentiment_analyzer)
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Lifespan context manager for startup/shutdown events"""
+    # Startup: model already initialized at module level
+    logging.info("Sentiment Analysis API started")
+    yield
+    # Shutdown
+    logging.info("Sentiment Analysis API shutting down")
+
+# Initialize FastAPI app with lifespan
 app = FastAPI(
     title="Sentiment Analysis API",
     description="MLOps Sentiment Analysis Service for Company Reputation Monitoring",
-    version="1.0.0"
+    version="1.0.0",
+    lifespan=lifespan
 )
-
-# Initialize the sentiment analyzer and dataset processor
-sentiment_analyzer = None
-dataset_processor = None
-
-@app.on_event("startup")
-async def startup_event():
-    """Initialize model and dataset processor on startup"""
-    global sentiment_analyzer, dataset_processor
-    sentiment_analyzer = SentimentAnalyzer()
-    dataset_processor = DatasetProcessor(sentiment_analyzer)
 
 # Request/Response models
 class TextRequest(BaseModel):
     text: str = Field(..., min_length=1, max_length=512, description="Text to analyze")
 
 class BatchRequest(BaseModel):
-    texts: List[str] = Field(..., min_items=1, max_items=100, description="List of texts to analyze")
+    texts: List[str] = Field(..., min_length=1, max_length=100, description="List of texts to analyze")
 
 class SentimentResponse(BaseModel):
     text: str
