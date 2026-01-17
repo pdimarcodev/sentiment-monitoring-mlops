@@ -22,10 +22,10 @@ class SentimentAnalyzer:
         try:
             logger.info(f"Loading model: {self.model_name}")
             self.pipeline = pipeline(
-                "sentiment-analysis", 
+                "sentiment-analysis",
                 model=self.model_name,
                 tokenizer=self.model_name,
-                return_all_scores=True
+                top_k=None  # Return all scores (replaces deprecated return_all_scores)
             )
             logger.info("Model loaded successfully")
         except Exception as e:
