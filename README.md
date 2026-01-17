@@ -1,7 +1,6 @@
 # 🏢 MLOps Sentiment Analysis - Company Reputation Monitoring
 
 [![CI](https://github.com/pdimarcodev/sentiment-monitoring-mlops/actions/workflows/ci.yml/badge.svg)](https://github.com/pdimarcodev/sentiment-monitoring-mlops/actions/workflows/ci.yml)
-[![Docker](https://img.shields.io/docker/pulls/pdimarcodev/sentiment-analyzer)](https://hub.docker.com/r/pdimarcodev/sentiment-analyzer)
 
 An end-to-end MLOps solution for monitoring company reputation through automated sentiment analysis of social media content.
 
