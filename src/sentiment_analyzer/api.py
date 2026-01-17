@@ -248,13 +248,14 @@ async def predict_csv_file(
         
         REQUEST_DURATION.observe(time.time() - start_time)
         
-        # Export results to temporary file
-        export_path = tempfile.mktemp(suffix=f'.{export_format}')
+        # Export results to secure temporary file
+        with tempfile.NamedTemporaryFile(mode='w', suffix=f'.{export_format}', delete=False) as export_file:
+            export_path = export_file.name
         dataset_processor.export_results(result, export_path, export_format)
-        
+
         # Clean up uploaded file
         os.unlink(temp_file.name)
-        
+
         # Return the processed file
         media_type = "application/json" if export_format == "json" else "text/csv"
         return FileResponse(
@@ -263,7 +264,7 @@ async def predict_csv_file(
             filename=f"sentiment_results.{export_format}",
             background=None  # File will be cleaned up after response
         )
-        
+
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
@@ -317,13 +318,14 @@ async def predict_json_file(
         
         REQUEST_DURATION.observe(time.time() - start_time)
         
-        # Export results to temporary file
-        export_path = tempfile.mktemp(suffix=f'.{export_format}')
+        # Export results to secure temporary file
+        with tempfile.NamedTemporaryFile(mode='w', suffix=f'.{export_format}', delete=False) as export_file:
+            export_path = export_file.name
         dataset_processor.export_results(result, export_path, export_format)
-        
+
         # Clean up uploaded file
         os.unlink(temp_file.name)
-        
+
         # Return the processed file
         media_type = "application/json" if export_format == "json" else "text/csv"
         return FileResponse(
@@ -332,7 +334,7 @@ async def predict_json_file(
             filename=f"sentiment_results.{export_format}",
             background=None
         )
-        
+
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
@@ -341,4 +343,4 @@ async def predict_json_file(
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8000)  # nosec B104 - intentional for Docker
