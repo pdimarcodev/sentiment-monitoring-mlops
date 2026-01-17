@@ -71,8 +71,7 @@ jobs:
 
     - name: Check for known vulnerabilities
       run: |
-        safety check --json --output safety-report.json || true
-        safety check
+        safety check --output json || true
 
   build:
     runs-on: ubuntu-latest
