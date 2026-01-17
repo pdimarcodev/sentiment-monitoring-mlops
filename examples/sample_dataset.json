@@ -1,0 +1,62 @@
+[
+  {
+    "text": "This company has excellent products and service!",
+    "sentiment": "positive",
+    "source": "twitter",
+    "timestamp": "2024-01-15"
+  },
+  {
+    "text": "Very disappointed with my recent purchase.",
+    "sentiment": "negative", 
+    "source": "facebook",
+    "timestamp": "2024-01-16"
+  },
+  {
+    "text": "The delivery was on time and packaging was good.",
+    "sentiment": "positive",
+    "source": "review_site",
+    "timestamp": "2024-01-17"
+  },
+  {
+    "text": "Customer support needs improvement.",
+    "sentiment": "negative",
+    "source": "email",
+    "timestamp": "2024-01-18"
+  },
+  {
+    "text": "Average experience, nothing remarkable.",
+    "sentiment": "neutral",
+    "source": "survey",
+    "timestamp": "2024-01-19"
+  },
+  {
+    "text": "Innovative features and great design!",
+    "sentiment": "positive",
+    "source": "instagram",
+    "timestamp": "2024-01-20"
+  },
+  {
+    "text": "Quality control issues with the product.",
+    "sentiment": "negative",
+    "source": "reddit",
+    "timestamp": "2024-01-21"
+  },
+  {
+    "text": "The product works as expected.",
+    "sentiment": "neutral",
+    "source": "amazon",
+    "timestamp": "2024-01-22"
+  },
+  {
+    "text": "Best customer service experience ever!",
+    "sentiment": "positive",
+    "source": "chat",
+    "timestamp": "2024-01-23"
+  },
+  {
+    "text": "Overpriced and underperforming product.",
+    "sentiment": "negative",
+    "source": "yelp",
+    "timestamp": "2024-01-24"
+  }
+]
